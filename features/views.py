@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from features.models import Feature, FeatureForm, Customer, AddCustomerForm
+from django.db.models import Count
 # from django.core.urlresolvers import reverse
 
 
@@ -8,7 +9,7 @@ from features.models import Feature, FeatureForm, Customer, AddCustomerForm
 # a template name as its second argument and a dictionary as its optional third argument.
 
 def index(request):
-    latest_feature_list = Feature.objects.order_by('-created')
+    latest_feature_list = Feature.objects.annotate(num_customers=Count('customers')).order_by('-num_customers')[:15]
     context = {'latest_feature_list': latest_feature_list}
     return render(request, 'features/index.html', context)
 
