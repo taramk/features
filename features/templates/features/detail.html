@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h1>{{ feature.title }}</h1>
+    <p>{{ feature.description }}
+
+
+<h2>Requested by {{ feature.customers.count }} user(s)</h2>
+    <ul>
+    {% for customer in feature.customers.all %}
+        <li>{{ customer.email }}</li>
+    {% empty %}
+        <em>No customers have requested this feature yet.</em>
+    {% endfor %}
+    </ul>
+
+    <form action="" method="post" class="pure-form">
+    {% csrf_token %}
+        <label for="customer">Add customer: </label>
+        <input id="customer" type="text" name="customer" value="">
+        <input type="submit" value="Submit">
+    </form>
+
+
+<h2>Comments</h2>
+    <ul>
+    {% for comment in feature.comment_set.all %}
+        <li><em>{{comment.created}}</em>
+        <br>{{ comment.text }}</li>
+    {% empty %}
+        <em>No comments yet.</em>
+    {% endfor %}
+    </ul>
+
+
+{% endblock %}

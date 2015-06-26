@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+    {% if latest_feature_list %}
+        <table class="feature-list">
+        {% for feature in latest_feature_list %}
+            <tr>
+                <td>{{ feature.customers.count }}</td>
+                <td><a href="{% url 'features:detail' feature.id %}">{{ feature.title }}</a></td>
+
+            </tr>
+        {% endfor %}
+        </table>
+    {% else %}
+        <p>No features yet.</p>
+    {% endif %}
+{% endblock %}

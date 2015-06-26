@@ -1,0 +1,17 @@
+html, button, input, select, textarea,
+.pure-g [class *= "pure-u"] {
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif !important;
+}
+body, html { min-height: 100%;}
+body {
+    background-color: #fdfdfd;
+    color: #2e2e2e;
+    padding: 0;
+    font-size: 14px;
+    line-height: 28px;
+}
+
+.sidebar, .main-content {
+    padding: 5%;
+}
+.feature-list td { padding: 2px 7px;}
