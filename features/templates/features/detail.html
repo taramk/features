@@ -2,36 +2,45 @@
 
 {% block content %}
 
-    <h1>{{ feature.title }}</h1>
-    <p>{{ feature.description }}
+    <div class="pure-g">
+
+        <div class="pure-u-3-5 padded">
+            <h1>{{ feature.title }}</h1>
+            <a class="pure-button" href="/features/edit/{{feature.id}}">Edit</a>
+            <p>{{ feature.description }}</p>
+
+            <h2>Comments</h2>
+            <ul>
+            {% for comment in feature.comment_set.all %}
+                <li><em>{{comment.created}}</em>
+                <br>{{ comment.text }}</li>
+            {% empty %}
+                <em>No comments yet.</em>
+            {% endfor %}
+            </ul>
+        </div>
+
+        <div class="pure-u-2-5 padded">
+            <h2>Requesters ({{ feature.customers.count }})</h2>
+            <ul>
+            {% for customer in feature.customers.all %}
+                <li>{{ customer.email }}</li>
+            {% empty %}
+                <em>No customers have requested this feature yet.</em>
+            {% endfor %}
+            </ul>
+
+            <form action="" method="post" class="pure-form">
+            {% csrf_token %}
+                <input id="customer" type="text" name="customer_email" value="">
+                <input type="submit" value="Add" class="pure-button">
+            </form>
+        </div>
+
+    </div>
 
 
-<h2>Requested by {{ feature.customers.count }} user(s)</h2>
-    <ul>
-    {% for customer in feature.customers.all %}
-        <li>{{ customer.email }}</li>
-    {% empty %}
-        <em>No customers have requested this feature yet.</em>
-    {% endfor %}
-    </ul>
 
-    <form action="" method="post" class="pure-form">
-    {% csrf_token %}
-        <label for="customer">Add customer: </label>
-        <input id="customer" type="text" name="customer_email" value="">
-        <input type="submit" value="Submit">
-    </form>
-
-
-<h2>Comments</h2>
-    <ul>
-    {% for comment in feature.comment_set.all %}
-        <li><em>{{comment.created}}</em>
-        <br>{{ comment.text }}</li>
-    {% empty %}
-        <em>No comments yet.</em>
-    {% endfor %}
-    </ul>
 
 
 {% endblock %}

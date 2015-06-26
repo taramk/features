@@ -7,7 +7,7 @@
         <table class="feature-list">
         {% for feature in latest_feature_list %}
             <tr>
-                <td>{{ feature.customers.count }}</td>
+                <td><div class="customer-count">{{ feature.customers.count }}</div></td>
                 <td><a href="{% url 'features:detail' feature.id %}">{{ feature.title }}</a></td>
 
             </tr>

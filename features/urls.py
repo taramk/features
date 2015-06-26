@@ -8,5 +8,6 @@ urlpatterns = patterns('',
     # ex: /requests/5/
     url(r'^(?P<feature_id>\d+)/$', views.detail, name='detail'),
     # ex: /requests/5/results/
-    url(r'^new-feature$', views.create_feature, name='new-feature')
+    url(r'^new-feature$', views.create_feature, name='new-feature'),
+    url(r'^edit/(?P<feature_id>\d+)/$', views.create_feature, name='new-feature')
 )

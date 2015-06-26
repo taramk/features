@@ -28,7 +28,7 @@ class Comment(models.Model):
 
 
 class FeatureForm(ModelForm):
-    customer_email = EmailField()
+    customer_email = EmailField(required=False)
 
     class Meta:
         model = Feature
