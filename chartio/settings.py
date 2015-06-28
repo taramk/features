@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
@@ -66,8 +65,9 @@ DATABASES = {}
 
 # Parse database configuration from $DATABASE_URL
 import dj_database_url
-from local_settings import DATABASE_URL
-DATABASES['default'] = dj_database_url.config(default=DATABASE_URL)
+
+DATABASES['default'] = dj_database_url.config(default=os.environ['DATABASE_URL'])
+# DATABASES = {'default': dj_database_url.config(default=os.environ['DATABASE_URL'])}
 
 # Enable Connection Pooling
 DATABASES['default']['ENGINE'] = 'django_postgrespool'
