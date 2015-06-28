@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
-from features.models import Feature, FeatureForm, Customer, AddCustomerForm
+from features.models import Feature, FeatureForm, Customer, AddCustomerForm, CommentForm
 from django.db.models import Count
 # from django.core.urlresolvers import reverse
 
@@ -17,13 +17,21 @@ def index(request):
 def detail(request, feature_id):
     feature = get_object_or_404(Feature, pk=feature_id)
     if request.method == 'POST':  # If the form has been submitted...
-        form = AddCustomerForm(request.POST)  # A form bound to the POST data
-        if form.is_valid():  # All validation rules pass
-            customer, _ = Customer.objects.get_or_create(email=form.cleaned_data['customer_email'])
-            feature.customers.add(customer)
-            return render(request, 'features/detail.html', {'feature': feature})
+        if request.POST.get('comment'):
+            commentform = CommentForm(request.POST)
+            if commentform.is_valid():
+                comment = commentform.save(commit=False)
+                comment.feature = feature
+                comment.save()
+        elif request.POST.get('customer'):
+            customerform = AddCustomerForm(request.POST)  # A form bound to the POST data
+            if customerform.is_valid():  # All validation rules pass
+                customer, _ = Customer.objects.get_or_create(email=customerform.cleaned_data['customer_email'])
+                feature.customers.add(customer)
+                return render(request, 'features/detail.html', {'feature': feature})
     else:
-        form = AddCustomerForm()  # An unbound form
+        customerform = AddCustomerForm()  # An unbound form
+        commentform = CommentForm()
     return render(request, 'features/detail.html', {'feature': feature})
 
 
@@ -44,11 +52,27 @@ def create_feature(request, feature_id=None):
 
     if request.method == 'POST':  # If the form has been submitted...
         if form.is_valid():  # All validation rules pass
-            feature = form.save()
-            customer_email = form.cleaned_data['customer_email']
-            if customer_email:
-                customer, _ = Customer.objects.get_or_create(email=customer_email)
-                feature.customers.add(customer)
-            return render(request, 'features/detail.html', {'feature': feature})
+            if request.POST.get('delete'):
+                f.delete()
+                return HttpResponseRedirect("/features/")
+            else:
+                feature = form.save()
+                customer_email = form.cleaned_data['customer_email']
+                if customer_email:
+                    customer, _ = Customer.objects.get_or_create(email=customer_email)
+                    feature.customers.add(customer)
+                return render(request, 'features/detail.html', {'feature': feature})
 
     return render(request, 'features/new-feature.html', {'form': form})
+
+
+# def add_comment(request, feature_id):
+#     feature = get_object_or_404(Feature, pk=feature_id)
+#     if request.method == 'POST':  # If the form has been submitted...
+#         form = CommentForm(request.POST)  # A form bound to the POST data
+#         if form.is_valid():  # All validation rules pass
+#             form.save()
+#             return render(request, 'features/detail.html', {'feature': feature})
+#     else:
+#         form = CommentForm()  # An unbound form
+#     return render(request, 'features/detail.html', {'feature': feature})

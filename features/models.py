@@ -25,6 +25,7 @@ class Comment(models.Model):
     feature = models.ForeignKey(Feature)
     text = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
+    commenter = models.CharField(max_length=50)
 
 
 class FeatureForm(ModelForm):
@@ -37,3 +38,15 @@ class FeatureForm(ModelForm):
 
 class AddCustomerForm(forms.Form):
     customer_email = EmailField()
+
+
+class DeleteFeatureForm(ModelForm):
+    class Meta:
+        model = Feature
+        fields = []
+
+
+class CommentForm(ModelForm):
+    class Meta:
+        model = Comment
+        fields = ["commenter", "text"]

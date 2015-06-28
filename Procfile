@@ -1,0 +1,1 @@
+web: gunicorn chartio.wsgi --log-file -

@@ -4,10 +4,16 @@
 {% block content %}
 
     {% if latest_feature_list %}
-        <table class="feature-list">
+        <table class="pure-table pure-table-striped">
+            <thead>
+                <tr>
+                    <th>Votes</th>
+                    <th>Name</th>
+                </tr>
+            </thead>
         {% for feature in latest_feature_list %}
             <tr>
-                <td><div class="customer-count">{{ feature.customers.count }}</div></td>
+                <td>{{ feature.customers.count }}</td>
                 <td><a href="{% url 'features:detail' feature.id %}">{{ feature.title }}</a></td>
 
             </tr>

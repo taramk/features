@@ -2,11 +2,11 @@
 
 {% block content %}
 
-<h2>New Feature</h2>
-
 <form method="post" action="" class="pure-form pure-form-stacked">{% csrf_token %}
     {{ form }}
-    <input type='submit' value='Submit' />
+    <br>
+    <input type="submit" value="Delete" name="delete" class="pure-button button-error">
+    <input type='submit' value='Submit' class="pure-button submit-button" />
 </form>
 
 
