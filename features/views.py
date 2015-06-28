@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404, render, redirect
+from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from features.models import Feature, FeatureForm, Customer, AddCustomerForm, CommentForm
 from django.db.models import Count
@@ -61,7 +62,7 @@ def create_feature(request, feature_id=None):
                 if customer_email:
                     customer, _ = Customer.objects.get_or_create(email=customer_email)
                     feature.customers.add(customer)
-                return render(request, 'features/detail.html', {'feature': feature})
+                return HttpResponseRedirect('/features/%i/' % feature.id)
 
     return render(request, 'features/new-feature.html', {'form': form})
 
