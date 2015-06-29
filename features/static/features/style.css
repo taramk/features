@@ -24,14 +24,21 @@ ul {
     text-decoration: none;
     color: inherit;
 }
-.feature-list td {
-    padding: 2px 7px;
+table.feature-list {
+    border-collapse: collapse !important;
+    width: 50%;
 }
-.customer-count {
-    padding: 2px 7px;
-    background-color: #3C97DA;
-    color: #fff;
-    border-radius: 5px;
+.feature-list tr {
+    border-bottom: 1px solid #ccc !important;
+}
+.feature-list td, th {
+    padding: 2px 5px !important;
+}
+.feature-name {
+    text-align: left;
+}
+.vote-count {
+    text-align: right;
 }
  .button-error {
     color: white !important;
