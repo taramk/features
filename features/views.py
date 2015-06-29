@@ -1,5 +1,5 @@
-from django.shortcuts import get_object_or_404, render, redirect
-from django.core.urlresolvers import reverse
+from django.shortcuts import get_object_or_404, render
+# from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from features.models import Feature, FeatureForm, Customer, AddCustomerForm, CommentForm
 from django.db.models import Count
@@ -66,14 +66,3 @@ def create_feature(request, feature_id=None):
 
     return render(request, 'features/new-feature.html', {'form': form})
 
-
-# def add_comment(request, feature_id):
-#     feature = get_object_or_404(Feature, pk=feature_id)
-#     if request.method == 'POST':  # If the form has been submitted...
-#         form = CommentForm(request.POST)  # A form bound to the POST data
-#         if form.is_valid():  # All validation rules pass
-#             form.save()
-#             return render(request, 'features/detail.html', {'feature': feature})
-#     else:
-#         form = CommentForm()  # An unbound form
-#     return render(request, 'features/detail.html', {'feature': feature})
