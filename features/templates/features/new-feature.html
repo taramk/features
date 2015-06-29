@@ -2,10 +2,13 @@
 
 {% block content %}
 
-<form method="post" action="" class="pure-form pure-form-stacked">{% csrf_token %}
+<form method="post" action="" class="pure-form pure-form-stacked edit-form">{% csrf_token %}
     {{ form }}
     <br>
+
+    {% if form.instance.pk %}
     <input type="submit" value="Delete" name="delete" class="pure-button button-error">
+    {% endif %}
     <input type='submit' value='Submit' class="pure-button submit-button" />
 </form>
 

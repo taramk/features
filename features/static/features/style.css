@@ -89,7 +89,7 @@ table.feature-list {
     background: #3C90CC !important;
 }
 .submit-button {
-    margin-left: 200px;
+    margin-left: 50%;
 }
 
 .search-results {
@@ -102,4 +102,7 @@ table.feature-list {
 .feature-body .edit-button {
     float: right;
     margin-top: 15px;
+}
+.edit-form textarea, input[type='text'] {
+    width: 50%;
 }
