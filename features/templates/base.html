@@ -6,7 +6,7 @@
             {% block title %}Chartio{% endblock %}
         </title>
         <link rel="stylesheet" type="text/css" href="/static/features/style.css">
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400,600' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,600' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="//cdn.jsdelivr.net/pure/0.6.0/pure-min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
@@ -15,19 +15,26 @@
 
     <body>
 
-        <div class="pure-g">
-            <div class="pure-u-1-1 padded">
-                <a href="/features/" class="header-text"><h1>Chartio Features</h1></a>
+        <div class="pure-g header-nav">
+            <div class="pure-u-2-5 padded">
+                <a href="/features/">
+                    <img src="https://chartio.com/logo/logo-black-transparent.png">
+                    <h1>Features</h1>
+                </a>
+            </div>
+            <div class="pure-u-2-5 padded">
+                <form method="get" action="/features/search/" class="pure-form search-bar">
+                    <input type="search" name="q">
+                    <input type="submit" class="pure-button button-primary" value="Search">
+                </form>
+            </div>
+            <div class="pure-u-1-5 padded">
+                <a class="pure-button new-feature button-primary" href="/features/new-feature">Add new feature</a>
             </div>
         </div>
 
         <div class="pure-g">
-            <div class="pure-u-1-4 padded">
-                <a class="pure-button" href="/features/new-feature">Add new feature</a>
-                <br><br>
-                <a class="pure-button" href="/features/search">Search</a>
-            </div>
-            <div class="pure-u-3-4 padded">
+            <div class="pure-u-1-1 padded">
                 {% block content %}
                 {% endblock %}
             </div>

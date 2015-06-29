@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, render_to_response
 # from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from features.models import Feature, FeatureForm, Customer, AddCustomerForm, CommentForm
@@ -66,3 +66,12 @@ def create_feature(request, feature_id=None):
 
     return render(request, 'features/new-feature.html', {'form': form})
 
+
+def search(request):
+    return render_to_response('search/search.html', {'query': 'query'})
+
+# def search(request):
+#     sqs = SearchQuerySet()
+#     form = SearchForm(request.POST, searchqueryset=sqs, load_all=False)
+#     if form.is_valid():
+#         return form.search()
