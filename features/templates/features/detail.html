@@ -18,8 +18,11 @@
 
              <form action="" method="post" class="pure-form pure-form-stacked">
             {% csrf_token %}
-                <input id="commenter" type="text" name="commenter" value="" placeholder="Your name">
-                <textarea cols="40" rows="3" id="text" type="text" name="text" value="" placeholder="Comment text"></textarea>
+            {% for field in form %}
+                {{ field.errors }}
+            {% endfor %}
+                <input id="commenter" type="text" name="commenter" value="" required placeholder="Your name">
+                <textarea cols="40" rows="3" id="text" type="text" name="text" value="" required placeholder="Comment text"></textarea>
                 <input type="submit" value="Add" name="comment" class="pure-button">
             </form>
 
@@ -45,7 +48,8 @@
 
             <form action="" method="post" class="pure-form">
             {% csrf_token %}
-                <input id="customer" type="text" name="customer_email" value="" placeholder="email">
+            {{ form.customer_email.errors }}
+                <input id="customer" type="email" name="customer_email" value="" required placeholder="email">
                 <input type="submit" value="Add" name="customer" class="pure-button">
             </form>
         </div>
