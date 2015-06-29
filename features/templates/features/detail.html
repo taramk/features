@@ -15,20 +15,22 @@
             <p>{{ feature.description }}</p>
 
             <h2>Comments</h2>
+
+             <form action="" method="post" class="pure-form pure-form-stacked">
+            {% csrf_token %}
+                <input id="commenter" type="text" name="commenter" value="" placeholder="Your name">
+                <textarea cols="40" rows="3" id="text" type="text" name="text" value="" placeholder="Comment text"></textarea>
+                <input type="submit" value="Add" name="comment" class="pure-button">
+            </form>
+
             <ul>
             {% for comment in feature.comment_set.all %}
-                <li><em>{{comment.created}}</em>
+                <li>{{comment.commenter}}&emsp;<em>{{comment.created}}</em>
                 <br>{{ comment.text }}</li>
             {% empty %}
                 <em>No comments yet.</em>
             {% endfor %}
             </ul>
-             <form action="" method="post" class="pure-form">
-            {% csrf_token %}
-                <input id="commenter" type="text" name="commenter" value="">
-                <input id="text" type="text" name="text" value="">
-                <input type="submit" value="Add" name="comment" class="pure-button">
-            </form>
         </div>
 
         <div class="pure-u-2-5 padded">
@@ -43,7 +45,7 @@
 
             <form action="" method="post" class="pure-form">
             {% csrf_token %}
-                <input id="customer" type="text" name="customer_email" value="">
+                <input id="customer" type="text" name="customer_email" value="" placeholder="email">
                 <input type="submit" value="Add" name="customer" class="pure-button">
             </form>
         </div>
