@@ -40,8 +40,13 @@ INSTALLED_APPS = (
     'django.contrib.sites',
 )
 
+BASIC_WWW_AUTHENTICATION_USERNAME = os.environ['BASIC_WWW_AUTHENTICATION_USERNAME']
+BASIC_WWW_AUTHENTICATION_PASSWORD = os.environ['BASIC_WWW_AUTHENTICATION_PASSWORD']
+BASIC_WWW_AUTHENTICATION = True
+
 
 MIDDLEWARE_CLASSES = (
+    'chartio.middleware.BasicAuthenticationMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
